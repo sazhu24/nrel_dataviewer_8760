@@ -32,7 +32,60 @@ These filters determine the baseline and upgrade load profiles that will be expo
 - Wait for the “Data ready” message and download the file
 - Rename the file according to the naming convention (e.g., U1_ER.csv)
 
-Save to: {STATE}/inputs/ResStock
+Save to one of the input folders: 
+- {STATE}/inputs/ResStock
+- {STATE}/inputs/ComStock
+
+## ResStock Query Set
+
+Use the following queries to generate a consistent set of commercial-sector load profiles.
+
+---
+
+*ENERGY STAR HP — Electric Backup — Electric Baseline*  
+- **File name:** `U1_ER`  
+- **Upgrade:** ENERGY STAR heat pump with elec backup
+
+**Filters:**  
+- Heating fuel: Electricity
+
+---
+
+*ENERGY STAR HP — Electric Backup — Fuel Baseline*  
+- **File name:** `U1_FL`  
+- **Upgrade:** ENERGY STAR heat pump with elec backup
+
+**Filters:**  
+- Heating fuel: Natural Gas
+
+---
+
+*ENERGY STAR HP — Fuel Backup — Fuel Baseline*  
+- **File name:** `U4_FL`  
+- **Upgrade:** ENERGY STAR heat pump with existing system as backup
+
+**Filters:**  
+- Heating fuel: Natural Gas
+
+---
+
+*Geothermal heat pump — Fuel Baseline*  
+- **File name:** `U5_FL`  
+- **Upgrade:** Geothermal heat pump
+
+**Filters:**  
+- Heating fuel: Natural Gas
+
+---
+
+*Geothermal heat pump — Electric Baseline*  
+- **File name:** `U5_ER`  
+- **Upgrade:** Geothermal heat pump
+
+**Filters:**  
+- Heating fuel: Electricity
+
+---
 
 ## ComStock Query Set
 
