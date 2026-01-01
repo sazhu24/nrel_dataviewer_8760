@@ -83,6 +83,7 @@ Use the following queries to generate load profiles for DER Planner’s **reside
 
 **Filters:**  
 - Heating fuel: Natural Gas  
+- Hvac has ducts: Yes
 
 ---
 
@@ -92,7 +93,7 @@ Use the following queries to generate load profiles for DER Planner’s **reside
 
 **Filters:**  
 - Heating fuel: Electricity  
-
+- Hvac has ducts: Yes
 ---
 
 ## ComStock Query Set (Commercial)
