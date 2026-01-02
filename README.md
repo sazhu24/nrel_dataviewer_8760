@@ -161,3 +161,61 @@ Use the following queries to generate load profiles for DER Planner’s **commer
 - HVAC system type: PSZ-AC with gas boiler  
 
 ---
+
+*Geothermal HP — Electric Baseline*  
+- **File name:** `GSHP_ER`  
+- **Upgrade:** Packaged Water-to-Air Geothermal Heat Pump
+
+**Filters:**  
+- Heating fuel: Electricity
+- HVAC system type: PSZ-AC with electric coil
+
+---
+
+*Geothermal HP — Fuel Baseline*  
+- **File name:** `GSHP_FL`  
+- **Upgrade:** Packaged Water-to-Air Geothermal Heat Pump
+
+**Filters:**  
+- Heating fuel: Natural Gas  
+- HVAC system type: PSZ-AC with gas coil, PSZ-AC with gas boiler
+
+---
+
+*Package 1, Wall + Roof Insulation + New Windows — Electric Baseline*  
+- **File name:** `ENV_ER`  
+- **Upgrade:** Package 1, Wall + Roof Insulation + New Windows
+
+**Filters:**  
+- Heating fuel: Electricity
+
+---
+
+*Package 1, Wall + Roof Insulation + New Windows — Electric Baseline*  
+- **File name:** `ENV_FL`  
+- **Upgrade:** Package 1, Wall + Roof Insulation + New Windows
+
+**Filters:**  
+- Heating fuel: Natural Gas
+
+---
+
+*Thermostat Control GPR — Electric Baseline*  
+- **File name:** `Thermostat_Control_GPR_ER`  
+- **Upgrade:** Demand Flexibility, Thermostat Control, Load Shed for Grid Peak Reduction
+
+**Filters:**  
+- Heating fuel: Electricity
+
+---
+
+*Thermostat Control GPR — Fuel Baseline*  
+- **File name:** `Thermostat_Control_GPR_FL`  
+- **Upgrade:** Demand Flexibility, Thermostat Control, Load Shed for Grid Peak Reduction
+
+**Filters:**  
+- Heating fuel: Natural Gas
+
+---
+
+

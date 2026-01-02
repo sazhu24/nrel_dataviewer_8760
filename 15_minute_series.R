@@ -12,13 +12,13 @@ state <- "CT"
 
 # create directories for input and output folders
 paths <- list(
-  in_res  = fs::path(state, "inputs", "ResStock"),
-  in_com  = fs::path(state, "inputs", "ComStock"),
-  out_res = fs::path(state, "outputs", "ResStock"),
-  out_com = fs::path(state, "outputs", "ComStock")
+  in_res  = path(state, "inputs", "ResStock"),
+  in_com  = path(state, "inputs", "ComStock"),
+  out_res = path(state, "outputs", "ResStock"),
+  out_com = path(state, "outputs", "ComStock")
 )
 
-purrr::walk(paths[c("out_res", "out_com")], fs::dir_create, recurse = TRUE)
+walk(paths[c("out_res", "out_com")], dir_create, recurse = TRUE)
 
 options(scipen = 999, timeout = 300)
 
@@ -107,13 +107,13 @@ clean_15series <- function(df,
 }
 
 read_and_clean <- function(in_path) {
-  readr::read_csv(in_path, show_col_types = FALSE) %>%
+  read_csv(in_path, show_col_types = FALSE) %>%
     clean_15series()
 }
 
 write_clean <- function(df, out_dir, out_name) {
-  out_path <- fs::path(out_dir, paste0(out_name, ".csv"))
-  readr::write_csv(df, out_path)
+  out_path <- path(out_dir, paste0(out_name, ".csv"))
+  write_csv(df, out_path)
   out_path
 }
 
@@ -181,7 +181,7 @@ process_batch <- function(files, in_dir, out_dir) {
   
   log <- tibble(name = names(files), file = unname(files)) %>%
     mutate(
-      in_path = fs::path(in_dir, file),
+      in_path = path(in_dir, file),
       status = NA_character_,
       out_path = NA_character_,
       msg = NA_character_
@@ -192,9 +192,9 @@ process_batch <- function(files, in_dir, out_dir) {
   
   for (i in seq_along(files)) {
     nm <- names(files)[i]
-    in_path <- fs::path(in_dir, files[[i]])
+    in_path <- path(in_dir, files[[i]])
     
-    if (!fs::file_exists(in_path)) {
+    if (!file_exists(in_path)) {
       message("Missing: ", in_path)
       log$status[i] <- "skipped_missing"
       log$msg[i] <- "file does not exist"
