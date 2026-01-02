@@ -100,7 +100,7 @@ clean_15series <- function(df,
     filter(!is.na(time)) %>%
     mutate(
       incremental_electricity_kwh = upgrade_electricity_kwh - baseline_electricity_kwh,
-      incremental_gas_kwh         = upgrade_gas_kwh - baseline_gas_kwh,
+      incremental_gas_kwh = upgrade_gas_kwh - baseline_gas_kwh,
       incremental_electricity_unitized = unitize_load_shape(incremental_electricity_kwh),
       incremental_gas_unitized = unitize_load_shape(incremental_gas_kwh)
     )
@@ -120,15 +120,26 @@ write_clean <- function(df, out_dir, out_name) {
 plot_series <- function(
     df,
     title,
-    y = c("incremental_unitized", "both_mwh")
+    baseline,
+    y = c(
+      "A", # y = incremental_electricity_unitized
+      "B"  # y = both_mwh
+      )
 ) {
+  
+  # safer plotting: doesn't error if df is NULL
+  if (is.null(df)) {
+    message("Skipping plot (missing series): ", title)
+    return(invisible(NULL))
+  }
+  
   y <- match.arg(y)
   
   p <- ggplot(df, aes(x = time)) +
-    labs(title = title, x = "") +
+    labs(title = title, subtitle = str_glue('{baseline} Baseline'), x = "") +
     theme_sz()
   
-  if (y == "incremental_unitized") {
+  if (y == 'A') { # y = incremental_electricity_unitized
     
     p +
       geom_line(
@@ -158,19 +169,6 @@ plot_series <- function(
       ) +
       labs(y = "Electric Load (MWh)", color = "")
   }
-}
-
-# safer plotting: doesn't error if df is NULL
-plot_if_exists <- function(x,
-                           title,
-                           y = "incremental_unitized") {
-  
-  if (is.null(x)) {
-    message("Skipping plot (missing series): ", title)
-    return(invisible(NULL))
-  }
-  
-  print(plot_series(x, title = title, y = y))
 }
 
 process_batch <- function(files, in_dir, out_dir) {
@@ -248,15 +246,15 @@ res <- process_batch(res_files, paths$in_res, paths$out_res)
 print(attr(res, "log"), n = Inf)
 
 # Example plots
-plot_if_exists(res$U1_ER,  title = "ResStock-U1, Electric Baseline", "both_mwh")
-plot_if_exists(res$U1_ER,  title = "ResStock-U1, Electric Baseline", "incremental_unitized")
+plot_series(res$U1_ER, title = "ResStock: ENERGY STAR HP, Electric Backup", baseline = "Electric", y = "B")
+plot_series(res$U1_ER, title = "ResStock: ENERGY STAR HP, Electric Backup", baseline = "Electric", y = "A")
 
-plot_if_exists(res$U1_FL,  title = "ResStock-U1, Fuel Baseline")
-plot_if_exists(res$U4_FL,  title = "ResStock-U4, Fuel Baseline")
-plot_if_exists(res$U5_ER,  title = "ResStock-U5, Electric Baseline")
-plot_if_exists(res$U5_FL,  title = "ResStock-U5, Fuel Baseline")
-plot_if_exists(res$U16_ER, title = "ResStock-U16, Electric Baseline")
-plot_if_exists(res$U16_FL, title = "ResStock-U16, Fuel Baseline")
+plot_series(res$U1_FL, title = "ResStock: ENERGY STAR HP, Electric Backup", baseline = "Fuel", y = "A")
+plot_series(res$U4_FL, title = "ResStock: ENERGY STAR HP, Fuel Backup", baseline = "Fuel", y = "A")
+plot_series(res$U5_ER, title = "ResStock: Geothermal HP", baseline = "Electric", y = "A")
+plot_series(res$U5_FL, title = "ResStock: Geothermal HP", baseline = "Fuel", y = "A")
+plot_series(res$U16_ER, title = "ResStock: Envelope", baseline = "Electric", y = "A")
+plot_series(res$U16_FL, title = "ResStock: Envelope", baseline = "Fuel", y = "A")
 
 # ----------------------------
 # 4) ComStock
@@ -268,22 +266,30 @@ com_files <- c(
   HP_RTU_EB_FL           = "HP_RTU_EB_FL.csv",
   HP_RTU_EB_ER           = "HP_RTU_EB_ER.csv",
   HP_RTU_FB_FL           = "HP_RTU_FB_FL.csv",
+  GSHP_FL                 = "GSHP_FL.csv",
+  GSHP_ER                 = "GSHP_ER.csv",
   ENV_FL                 = "ENV_FL.csv",
   ENV_ER                 = "ENV_ER.csv",
-  DF_Lighting_Thermostat = "DF_Lighting_Thermostat.csv"
+  Thermostat_Control_GPR_FL = "Thermostat_Control_GPR_FL.csv",
+  Thermostat_Control_GPR_ER = "Thermostat_Control_GPR_ER.csv"
 )
 
 com <- process_batch(com_files, paths$in_com, paths$out_com)
 print(attr(com, "log"), n = Inf)
 
-plot_if_exists(com$HP_RTU_EB_FL,           title = "ComStock HP RTU (EB), Fuel Baseline")
-plot_if_exists(com$HP_RTU_FB_FL,           title = "ComStock HP RTU (FB), Fuel Baseline")
-plot_if_exists(com$HP_RTU_EB_ER,           title = "ComStock HP RTU (EB), Electric Baseline", "both_mwh")
+plot_series(com$HP_RTU_EB_FL, title = "ComStock HP RTU, Electric Backup", baseline = "Fuel", y = "A")
+plot_series(com$HP_RTU_FB_FL, title = "ComStock HP RTU, Fuel Backup", baseline = "Fuel", y = "A")
+plot_series(com$HP_RTU_EB_ER, title = "ComStock HP RTU, Electric Backup", baseline = "Electric", y = "B")
 
-plot_if_exists(com$HP_Boiler_EB_FL,        title = "ComStock HP Boiler (EB), Fuel Baseline")
-plot_if_exists(com$HP_Boiler_FB_FL,        title = "ComStock HP Boiler (FB), Fuel Baseline")
-plot_if_exists(com$ER_Boiler_FL,           title = "ComStock Electric Boiler, Fuel Baseline")
+plot_series(com$HP_Boiler_EB_FL, title = "ComStock HP Boiler, Electric Backup", baseline = "Fuel", y = "A")
+plot_series(com$HP_Boiler_FB_FL, title = "ComStock HP Boiler, Fuel Backup", baseline = "Fuel", y = "A")
+plot_series(com$ER_Boiler_FL, title = "ComStock Electric Boiler", baseline = "Fuel", y = "A")
 
-plot_if_exists(com$ENV_FL,                 title = "ComStock Envelope, Fuel Baseline")
-plot_if_exists(com$ENV_ER,                 title = "ComStock Envelope, Electric Baseline")
-plot_if_exists(com$DF_Lighting_Thermostat, title = "ComStock Thermostat")
+plot_series(com$GSHP_FL, title = "ComStock GSHP", baseline = "Fuel", y = "A")
+plot_series(com$GSHP_ER, title = "ComStock GSHP", baseline = "Electric", y = "A")
+
+plot_series(com$ENV_FL, title = "ComStock Envelope", baseline = "Fuel", y = "A")
+plot_series(com$ENV_ER, title = "ComStock Envelope", baseline = "Electric", y = "A")
+
+plot_series(com$Thermostat_Control_GPR_FL, title = "ComStock Thermostat", baseline = "Fuel", y = "A")
+plot_series(com$Thermostat_Control_GPR_ER, title = "ComStock Thermostat", baseline = "Electric", y = "A")
