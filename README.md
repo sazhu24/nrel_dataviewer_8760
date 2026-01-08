@@ -96,7 +96,26 @@ Use the following queries to generate load profiles for DER Planner’s **reside
 - Hvac has ducts: Yes
 ---
 
-## ComStock Query Set (Commercial)
+*Light Touch Envelope — Fuel Baseline*  
+- **File name:** `U16_FL`  
+- **Upgrade:** Envelope Only - Light Touch Envelope
+
+**Filters:**  
+- Heating fuel: Natural Gas 
+
+---
+
+*Light Touch Envelope — Electric Baseline*  
+- **File name:** `U16_ER`  
+- **Upgrade:**Envelope Only - Light Touch Envelope
+
+**Filters:**  
+- Heating fuel: Electricity
+- (Optional) Insulation Ceiling: > 10 ACH50
+- (Optional) Infiltration: < R49
+---
+
+# ComStock Query Set (Commercial)
 
 Use the following queries to generate load profiles for DER Planner’s **commercial sector** measures.
 
@@ -138,7 +157,7 @@ Use the following queries to generate load profiles for DER Planner’s **commer
 
 **Filters:**  
 - Heating fuel: Natural Gas  
-- HVAC system type: PSZ-AC with gas boiler  
+- HVAC heat type: Boiler
 
 ---
 
@@ -148,7 +167,7 @@ Use the following queries to generate load profiles for DER Planner’s **commer
 
 **Filters:**  
 - Heating fuel: Natural Gas  
-- HVAC system type: PSZ-AC with gas boiler  
+- HVAC heat type: Boiler  
 
 ---
 
@@ -158,7 +177,7 @@ Use the following queries to generate load profiles for DER Planner’s **commer
 
 **Filters:**  
 - Heating fuel: Natural Gas  
-- HVAC system type: PSZ-AC with gas boiler  
+- HVAC heat type: Boiler  
 
 ---
 
