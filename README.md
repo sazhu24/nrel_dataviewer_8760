@@ -7,11 +7,8 @@ Instructions for extracting 15-minute load profiles from the **ResStock** and **
 
 ### 1) Open the appropriate Data Viewer
 
-**ResStock (Residential)**  
-https://resstock.nrel.gov/dataviewer?datasetName=vizstock_resstock_amy2018_2024_release_2_by_state_vu
-
-**ComStock (Commercial)**  
-https://comstock.nrel.gov/dataviewer/?datasetName=vizstock_comstock_amy2018_r2_2025_ts_by_state_vu
+- [**ResStock Data Viewer**](https://resstock.nrel.gov/dataviewer?datasetName=vizstock_resstock_amy2018_2024_release_2_by_state_vu)
+- [**ComStock Data Viewer**](https://comstock.nrel.gov/dataviewer/?datasetName=vizstock_comstock_amy2018_r2_2025_ts_by_state_vu)
 
 Select the desired **state**, then click **Explore Timeseries**.
 
