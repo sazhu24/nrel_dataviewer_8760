@@ -16,7 +16,6 @@ https://comstock.nrel.gov/dataviewer/?datasetName=vizstock_comstock_amy2018_r2_2
 
 Select the desired **state**, then click **Explore Timeseries**.
 
----
 
 ### 2) Apply filters to generate the desired load profile
 
@@ -30,7 +29,6 @@ Then click **Edit Filters** and apply additional constraints as needed, such as:
 
 These filters define the baseline and upgrade load profiles that will be exported.
 
----
 
 ### 3) Export the timeseries
 
@@ -42,13 +40,11 @@ These filters define the baseline and upgrade load profiles that will be exporte
   - `{STATE}/inputs/ResStock/`
   - `{STATE}/inputs/ComStock/`
 
----
 
-## ResStock Query Set (Residential)
+# ResStock Query Set (Residential)
 
 Use the following queries to generate load profiles for DER Planner’s **residential sector** measures.
 
----
 
 *ENERGY STAR HP — Electric Backup — Electric Baseline*  
 - **File name:** `U1_ER`  
