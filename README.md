@@ -1,8 +1,7 @@
 # Extracting 8760 Load Profiles from NREL Data Viewers
 
-This README documents the standard workflow for extracting 15-minute load profiles from the **ResStock** and **ComStock** Data Viewers and saving them to the appropriate input folders for downstream processing in DER Planner.
+Instructions for extracting 15-minute load profiles from the **ResStock** and **ComStock** Data Viewers and saving them to the appropriate input folders for downstream processing.
 
----
 
 ## Steps for Downloading 15-Minute Timeseries
 
@@ -231,6 +230,5 @@ Use the following queries to generate load profiles for DER Planner’s **commer
 **Filters:**  
 - Heating fuel: Natural Gas
 
----
 
 
