@@ -1,6 +1,6 @@
-# Extracting 8760 Load Profiles from NREL Data Viewers
+# Creating Hourly Load Profiles Using ResStock and ComStock Data Viewers
 
-Instructions for extracting 15-minute load profiles from the **ResStock** and **ComStock** Data Viewers and saving them to the appropriate input folders for downstream processing.
+Instructions for extracting 15-minute load profiles from the ResStock and ComStock Data Viewers and saving them to the appropriate input folders for downstream processing.
 
 
 ## Steps for Downloading 15-Minute Timeseries
